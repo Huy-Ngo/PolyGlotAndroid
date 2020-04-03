@@ -1,4 +1,4 @@
-package com.example.polyglotandroid.ui.home
+package com.polyglotandroid.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

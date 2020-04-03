@@ -1,4 +1,4 @@
-package com.example.polyglotandroid.ui.gallery
+package com.polyglotandroid.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
