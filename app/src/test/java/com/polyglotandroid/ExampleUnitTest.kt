@@ -1,4 +1,4 @@
-package com.example.polyglotandroid
+package com.polyglotandroid
 
 import org.junit.Test
 
