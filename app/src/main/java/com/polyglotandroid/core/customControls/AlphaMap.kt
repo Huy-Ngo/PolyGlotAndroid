@@ -8,8 +8,8 @@ import kotlin.collections.HashMap
  * constructed lettering.
  */
 class AlphaMap<K, V> {
-    private var longestEntry: Int = 0
-    private val delegate: HashMap<K, V> = hashMapOf()
+    var longestEntry: Int = 0
+    val delegate: HashMap<K, V> = hashMapOf()
     val isEmpty: Boolean
         get() = delegate.isEmpty()
 
@@ -21,7 +21,7 @@ class AlphaMap<K, V> {
         return delegate.put(key, orderValue)
     }
     fun containsKey(key: K): Boolean = delegate.containsKey(key)
-    fun get(key: K): V? = delegate.get(key)
+    fun get(key: K): V? = delegate[key]
     fun clear() = delegate.clear()
     override fun equals(comp: Any?): Boolean {
         var ret = false
@@ -30,5 +30,9 @@ class AlphaMap<K, V> {
         return ret
     }
 
-    // NOTE: Objects.hashCode() requires higher level API.
+    override fun hashCode(): Int {
+        var result = longestEntry
+        result = 31 * result + delegate.hashCode()
+        return result
+    }
 }

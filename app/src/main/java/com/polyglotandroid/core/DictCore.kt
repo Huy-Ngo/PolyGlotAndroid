@@ -3,8 +3,13 @@ package com.polyglotandroid.core
 import com.polyglotandroid.core.collections.ConWordCollection
 
 class DictCore (_polyGlot: PolyGlot) {
+    fun getTypes(): Any {
+        TODO("not yet implemented")
+    }
+
     private val polyGlot: PolyGlot = _polyGlot
-    private var wordCollection: ConWordCollection
+    var wordCollection: ConWordCollection
+    var propertiesManager: PropertiesManager
     // TODO: other properties
     init {
         try {
