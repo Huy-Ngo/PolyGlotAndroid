@@ -1,15 +1,20 @@
 package com.polyglotandroid.core.collections
 
 import com.polyglotandroid.core.DictCore
+import com.polyglotandroid.core.nodes.ConWord
 
-class ConWordCollection (_dictCore: DictCore): DictionaryCollection<ConWord> {
-    private val SPLIT_CHAR: String = ','
-    private val dictCore: DictCore
-    private val allConWords: Map<String, Int>
-    private val allLocalWords: Map<String, Int>
-    private  var orderByLocal: Boolean = false
 
-    init {
-        super(ConWord())
+class ConWordCollection (_dictCore: DictCore): DictionaryCollection<ConWord>() {
+    private val core: DictCore? = null
+    private val allConWords: Map<String, Int>? = null
+    private val allLocalWords: Map<String, Int>? = null
+    private val orderByLocal = false
+
+    override fun testWordLegality(n: ConWord): ConWord {
+        TODO("Not yet implemented")
+    }
+
+    companion object {
+        val SPLIT_CHAR: Char = ','
     }
 }

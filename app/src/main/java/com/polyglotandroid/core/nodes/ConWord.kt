@@ -1,6 +1,7 @@
 package com.polyglotandroid.core.nodes
 
 import com.polyglotandroid.core.DictCore
+import com.polyglotandroid.core.PGUtil
 import com.polyglotandroid.core.collections.ConWordCollection
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -140,26 +141,26 @@ class ConWord(core: DictCore) : DictNode() {
     }
     // TODO: clean up code
     fun writeXML (doc: Document, rootElement: Element) {
-        val wordNode: Element = doc.createElement(PGTUtil.WORD_XID)
-        var wordValue: Element = doc.createElement(PGTUtil.WORD_ID_XID)
+        val wordNode: Element = doc.createElement(PGUtil.WORD_XID)
+        var wordValue: Element = doc.createElement(PGUtil.WORD_ID_XID)
         val wordId = this.id
         wordValue.appendChild(doc.createTextNode(wordId.toString()))
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.LOCALWORD_XID)
+        wordValue = doc.createElement(PGUtil.LOCALWORD_XID)
         wordValue.appendChild(doc.createTextNode(this.localWord))
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.CONWORD_XID)
+        wordValue = doc.createElement(PGUtil.CONWORD_XID)
         wordValue.appendChild(doc.createTextNode(this.value))
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_POS_ID_XID)
+        wordValue = doc.createElement(PGUtil.WORD_POS_ID_XID)
         wordValue.appendChild(doc.createTextNode(this.typeId.toString()))
         wordNode.appendChild(wordValue)
 
         try {
-            wordValue = doc.createElement(PGTUtil.WORD_PRONUNCIATION_XID)
+            wordValue = doc.createElement(PGUtil.WORD_PRONUNCIATION_XID)
             wordValue.appendChild(doc.createTextNode(this.pronunciation))
             wordNode.appendChild(wordValue)
         } catch (e: Exception) {
@@ -167,45 +168,45 @@ class ConWord(core: DictCore) : DictNode() {
             IOHandler.writeErrorLog(e)
         }
 
-        wordValue = doc.createElement(PGTUtil.WORD_DEFINITION_XID)
+        wordValue = doc.createElement(PGUtil.WORD_DEFINITION_XID)
         wordValue.appendChild(doc.createTextNode(WebInterface.archiveHTML(this.definition)))
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_PRONUNCIATION_OVERRIDE_XID)
+        wordValue = doc.createElement(PGUtil.WORD_PRONUNCIATION_OVERRIDE_XID)
         wordValue.appendChild(
-            doc.createTextNode(if (this.procOverride) PGTUtil.TRUE else PGTUtil.FALSE)
+            doc.createTextNode(if (this.pronunciationOverride) PGUtil.TRUE else PGUtil.FALSE)
         )
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_AUTO_DECLENSION_OVERRIDE_XID)
+        wordValue = doc.createElement(PGUtil.WORD_AUTO_DECLENSION_OVERRIDE_XID)
         wordValue.appendChild(
-            doc.createTextNode(if (autoDeclensionOverride) PGTUtil.TRUE else PGTUtil.FALSE)
+            doc.createTextNode(if (autoDeclensionOverride) PGUtil.TRUE else PGUtil.FALSE)
         )
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_RULES_ORVERRIDE_XID)
+        wordValue = doc.createElement(PGUtil.WORD_RULES_OVERRIDE_XID)
         wordValue.appendChild(
-            doc.createTextNode(if (rulesOverride) PGTUtil.TRUE else PGTUtil.FALSE)
+            doc.createTextNode(if (rulesOverride) PGUtil.TRUE else PGUtil.FALSE)
         )
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_CLASS_COLLECTION_XID)
-        for ((key, value) in this.getClassValues()) {
-            val classVal = doc.createElement(PGTUtil.WORD_CLASS_AND_VALUE_XID)
+        wordValue = doc.createElement(PGUtil.WORD_CLASS_COLLECTION_XID)
+        for ((key, value) in this.classValues) {
+            val classVal = doc.createElement(PGUtil.WORD_CLASS_AND_VALUE_XID)
             classVal.appendChild(doc.createTextNode(key.toString() + "," + value))
             wordValue.appendChild(classVal)
         }
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_CLASS_TEXT_VALUE_COLLECTION_XID)
-        for ((key, value) in this.getClassTextValues()) {
-            val classVal = doc.createElement(PGTUtil.WORD_CLASS_TEXT_VALUE_XID)
-            classVal.appendChild(doc.createTextNode(key.toString() + "," + value))
+        wordValue = doc.createElement(PGUtil.WORD_CLASS_TEXT_VALUE_COLLECTION_XID)
+        for ((key, value) in this.classTextValues) {
+            val classVal = doc.createElement(PGUtil.WORD_CLASS_TEXT_VALUE_XID)
+            classVal.appendChild(doc.createTextNode("$key,$value"))
             wordValue.appendChild(classVal)
         }
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGTUtil.WORD_ETYMOLOGY_NOTES_XID)
+        wordValue = doc.createElement(PGUtil.WORD_ETYMOLOGY_NOTES_XID)
         wordValue.appendChild(doc.createTextNode(this.etymologyNote))
         wordNode.appendChild(wordValue)
 
