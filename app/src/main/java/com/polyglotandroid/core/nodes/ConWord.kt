@@ -32,7 +32,7 @@ class ConWord(core: DictCore) : DictNode() {
     var autoDeclensionOverride: Boolean = false
     var rulesOverride: Boolean = false
     // FIXME: Initiate these two properties properly
-    private var core: DictCore? = null
+    var core: DictCore? = null
         set(value) {
             if (value != null)
                 parentCollection = value.wordCollection

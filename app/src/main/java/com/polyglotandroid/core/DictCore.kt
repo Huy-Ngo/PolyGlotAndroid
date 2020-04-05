@@ -7,6 +7,7 @@ class DictCore (_polyGlot: PolyGlot) {
         TODO("not yet implemented")
     }
 
+    val types: Any
     private val polyGlot: PolyGlot = _polyGlot
     var wordCollection: ConWordCollection
     var propertiesManager: PropertiesManager
