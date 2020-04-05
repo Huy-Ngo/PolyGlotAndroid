@@ -39,10 +39,10 @@ class ConWord(core: DictCore) : DictNode() {
                 parentCollection = null
             field = value
         }
-    var parentCollection: ConWordCollection? = null
+    private var parentCollection: ConWordCollection? = null
     private val classValues: HashMap<Int, Int> = hashMapOf()
     private val classTextValues: HashMap<Int, String> = hashMapOf()
-    var filterEtyParent: Any? = Object()
+    var filterEtyParent: Any? = Object() // This one doesn't seem to be used
     var typeError: String = ""
 
 
