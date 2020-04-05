@@ -121,7 +121,7 @@ class PGUtil {
         const val FAMILY_NAME_XID = "familyName"
         const val FAMILY_WORD_XID = "familyWord"
 
-        // auto-declansion generation properties
+        // auto-declension generation properties
         const val DECLENSION_GENERATION_RULE_XID = "declensionGenerationRule"
         const val DECLENSION_GENERATION_RULE_TYPE_XID = "declensionGenerationRuleTypeId"
         const val DECLENSION_GENERATION_RULE_COMB_XID = "declensionGenerationRuleComb"
