@@ -5,7 +5,7 @@ import java.lang.ClassCastException
 import kotlin.math.min
 
 abstract class DictNode (_id: Int?) : Comparable<DictNode> {
-    protected open var value: String = ""
+    open var value: String = ""
         set(conWord: String) {
             field = conWord.trim()
         }
