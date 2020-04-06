@@ -2,6 +2,9 @@ package com.polyglotandroid.core.nodes
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.polyglotandroid.core.PGUtil
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 
 class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
     : Comparable<DeclensionGenerationRule> {
@@ -11,7 +14,7 @@ class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
     var regex = ""
     var name = ""
     val transformations: ArrayList<DeclensionGenerationTransform> = ArrayList()
-    val applyToClasses: Map<Int, Int> = HashMap()
+    val applyToClasses: HashMap<Int, Int> = HashMap()
     var transformBuffer: DeclensionGenerationTransform = DeclensionGenerationTransform()
     private var debugString = ""
 
@@ -158,4 +161,88 @@ class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
         return ret
     }
 
+    fun addClassToFilterList(classId: Int, valueId: Int?) {
+        if (classId == -1) {
+            wipeClassFilter()
+            applyToClasses.put(classId, -1)
+        } else if (!applyToClasses.containsKey(classId)) {
+            // cannot contain both All and any other selection
+            applyToClasses.remove(-1)
+            applyToClasses.put(classId, valueId)
+        } else {
+            applyToClasses.replace(classId, valueId)
+        }
+    }
+
+    /**
+     * Removes a class value, given [classId] and [valueId] from the list to apply this rule to.
+     * Removes the [classId] entirely from the rule if no
+     * values from within it are selected
+     */
+    fun removeClassFromFilterList(classId: Int?, valueId: Int) {
+        if (applyToClasses.containsKey(classId) && applyToClasses[classId] == valueId) {
+            applyToClasses.remove(classId)
+        }
+    }
+
+    /**
+     * Wipes all classes from rule selection filter
+     */
+    fun wipeClassFilter() {
+        applyToClasses.clear()
+    }
+
+    fun writeXML(doc: Document, rootElement: Element) {
+        val ruleNode = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_XID)
+        rootElement.appendChild(ruleNode)
+
+        var wordValue = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_COMB_XID)
+        wordValue.appendChild(doc.createTextNode(combinationId))
+        ruleNode.appendChild(wordValue)
+
+        wordValue = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_NAME_XID);
+        wordValue.appendChild(doc.createTextNode(this.name));
+        ruleNode.appendChild(wordValue);
+
+        wordValue = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_REGEX_XID);
+        wordValue.appendChild(doc.createTextNode(this.regex));
+        ruleNode.appendChild(wordValue);
+
+        wordValue = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_TYPE_XID);
+        wordValue.appendChild(doc.createTextNode(this.typeId.toString()));
+        ruleNode.appendChild(wordValue);
+
+        wordValue = doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_INDEX_XID);
+        wordValue.appendChild(doc.createTextNode(this.index.toString()));
+        ruleNode.appendChild(wordValue);
+
+        for (transformation in transformations) {
+            transformation.writeXML(doc, ruleNode)
+        }
+
+        val applyToClassesEntry =
+            doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_APPLY_TO_CLASSES_XID)
+
+        for (entry in applyToClasses.entries) {
+            val applyToClassValue: Element =
+                doc.createElement(PGUtil.DECLENSION_GENERATION_RULE_APPLY_TO_CLASS_VALUE_XID)
+            applyToClassValue.appendChild(doc.createTextNode("${entry.key},${entry.value}"))
+            applyToClassesEntry.appendChild(applyToClassValue)
+        }
+
+        ruleNode.appendChild(applyToClassesEntry)
+    }
+
+    override fun equals(other: Any?): Boolean =
+        when (other) {
+            this -> true
+            is DeclensionGenerationRule -> typeId == other.typeId &&
+                    ((combinationId == null && other.combinationId == null) ||
+                            combinationId == other.combinationId) &&
+                    regex == other.regex &&
+                    name == other.name &&
+                    transformations == other.transformations &&
+                    applyToClasses == other.applyToClasses
+            else -> false
+        }
 }
