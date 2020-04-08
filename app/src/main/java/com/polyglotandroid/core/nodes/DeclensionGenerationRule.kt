@@ -245,4 +245,17 @@ class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
                     applyToClasses == other.applyToClasses
             else -> false
         }
+
+    override fun hashCode(): Int {
+        var result = typeId
+        result = 31 * result + index
+        result = 31 * result + (combinationId?.hashCode() ?: 0)
+        result = 31 * result + regex.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + transformations.hashCode()
+        result = 31 * result + applyToClasses.hashCode()
+        result = 31 * result + transformBuffer.hashCode()
+        result = 31 * result + debugString.hashCode()
+        return result
+    }
 }
