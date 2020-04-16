@@ -1,5 +1,9 @@
 package com.polyglotandroid.core
 
+import android.graphics.Color
+import android.view.Window
+import javax.swing.ImageIcon
+
 /**
  * This contains various constant values in PolyGlotAndroid
  */
@@ -227,5 +231,87 @@ class PGUtil {
         const val PLABEL_MIN_FONT_SIZE = 3
         const val PLABEL_MAX_FONT_SIZE = 240
 
+        // color constants
+        val COLOR_DISABLED_BG = Color.parseColor("#b0b0b0");
+        val COLOR_ENABLED_BG = Color.parseColor("#66b2ff")
+        val COLOR_SELECTED_BG = Color.parseColor("#7979ef")
+        val COLOR_DISABLED_FOREGROUND = Color.parseColor("#808080")
+        val COLOR_MOUSEOVER_BORDER = Color.parseColor("#909090");
+        val COLOR_TEXT = Color.parseColor("#000000");
+        val COLOR_TEXT_BG = Color.parseColor("#ffffff");
+        val COLOR_TEXT_NIGHT = Color.parseColor("#ffffff");
+        val COLOR_TEXT_BG_NIGHT = Color.parseColor("#000000");
+        val COLOR_DEFAULT_TEXT = Color.LTGRAY
+        val COLOR_DEFAULT_TEXT_NIGHT = Color.DKGRAY
+        val COLOR_TEXT_DISABLED = Color.LTGRAY
+        val COLOR_TEXT_DISABLED_BG = Color.DKGRAY
+        val COLOR_TEXT_DISABLED_NIGHT = Color.LTGRAY
+        val COLOR_TEXT_DISABLED_BG_NIGHT = Color.DKGRAY
+        val COLOR_CHECKBOX_SELECTED = Color.BLACK
+        val COLOR_CHECKBOX_BG = Color.WHITE
+        val COLOR_CHECKBOX_OUTLINE = Color.BLACK
+        val COLOR_CHECKBOX_HOVER = Color.BLACK
+        val COLOR_CHECKBOX_CLICKED = Color.LTGRAY
+        val COLOR_CHECKBOX_FIELD_BACK = Color.WHITE
+        val COLOR_CHECKBOX_SELECTED_NIGHT = Color.GRAY
+        val COLOR_CHECKBOX_BG_NIGHT = Color.BLACK
+        val COLOR_CHECKBOX_OUTLINE_NIGHT = Color.DKGRAY
+        val COLOR_CHECKBOX_HOVER_NIGHT = Color.LTGRAY
+        val COLOR_CHECKBOX_CLICKED_NIGHT = Color.WHITE
+        val COLOR_CHECKBOX_FIELD_BACK_NIGHT = Color.BLACK
+        val COLOR_CHECKBOX_SELECTED_DISABLED = Color.GRAY
+        val COLOR_CHECKBOX_BG_DISABLED = Color.LTGRAY
+        val COLOR_CHECKBOX_OUTLINE_DISABLED = Color.GRAY
+        val COLOR_CHECKBOX_HOVER_DISABLED = Color.DKGRAY
+        val COLOR_CHECKBOX_CLICKED_DISABLED = Color.DKGRAY
+        val COLOR_CHECKBOX_FIELD_BACK_DISABLED = Color.GRAY
+        val COLOR_REQUIRED_LEX_COLOR = Color.rgb(255, 204, 204)
+
+        // visual style constants
+        const val CHECKBOX_ROUNDING = 3
+
+        // UI Elements to set on OSX (copy/paste/cut)
+        val INPUT_MAPS = arrayOf(
+            "Button.focusInputMap",
+            "CheckBox.focusInputMap",
+            "ComboBox.ancestorInputMap",
+            "EditorPane.focusInputMap",
+            "FileChooser.ancestorInputMap",
+            "FormattedTextField.focusInputMap",
+            "List.focusInputMap",
+            "PasswordField.focusInputMap",
+            "RadioButton.focusInputMap",
+            "RootPane.ancestorInputMap",
+            "ScrollBar.ancestorInputMap",
+            "ScrollPane.ancestorInputMap",
+            "Slider.focusInputMap",
+            "Spinner.ancestorInputMap",
+            "SplitPane.ancestorInputMap",
+            "TabbedPane.ancestorInputMap",
+            "TabbedPane.focusInputMap",
+            "Table.ancestorInputMap",
+            "TableHeader.ancestorInputMap",
+            "ToolBar.ancestorInputMap",
+            "Tree.ancestorInputMap",
+            "TextArea.focusInputMap",
+            "TextField.focusInputMap",
+            "TextPane.focusInputMap",
+            "ToggleButton.focusInputMap",
+            "Tree.focusInputMap"
+        )
+
+        // images and icons that only need to be loaded once TODO
+//        val ADD_BUTTON_ICON: ImageIcon
+//        val DEL_BUTTON_ICON: ImageIcon
+//        val ADD_BUTTON_ICON_PRESSED: ImageIcon
+//        val DEL_BUTTON_ICON_PRESSED: ImageIcon
+//        val POLYGLOT_ICON: ImageIcon
+
+        // Fonts stored here to cache values single time
+        // val MENU_FONT: Font TODO
+        // val CHARIS_UNICODE: Font TODO
+
+        // Versions TODO
+        // Version hierachy
     }
 }
