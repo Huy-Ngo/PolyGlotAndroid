@@ -212,5 +212,20 @@ class PGUtil {
         const val TRUE = "T"
         const val FALSE = "F"
         const val DISPLAY_NAME = "PolyGlot"
+
+        // web locations
+        const val UPDATE_FILE_URL = "https://example.com"
+
+        // numeric constants...
+        const val NUM_MENU_FLASHES = 4
+        const val MENU_FLASH_SLEEP = 200
+        const val DEFAULT_FONT_SIZE = 12.0
+        const val MAX_PROC_RECURSE = 100
+        const val DEFAULT_MAX_ROLLBACK_NUM = 10
+        const val MAX_FILE_PATH_LENGTH = 1000
+        const val MAX_LOG_CHARACTERS = 25000
+        const val PLABEL_MIN_FONT_SIZE = 3
+        const val PLABEL_MAX_FONT_SIZE = 240
+
     }
 }
