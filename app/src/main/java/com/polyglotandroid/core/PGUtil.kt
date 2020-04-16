@@ -2,7 +2,6 @@ package com.polyglotandroid.core
 
 import android.graphics.Color
 import android.view.Window
-import javax.swing.ImageIcon
 
 /**
  * This contains various constant values in PolyGlotAndroid
