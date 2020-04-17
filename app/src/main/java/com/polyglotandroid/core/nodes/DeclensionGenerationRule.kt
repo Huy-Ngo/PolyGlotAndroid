@@ -145,9 +145,9 @@ class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
             }
         } else {
             debugString += (("    Rule PoS "
-                    + word.core.types.getNodeById(typeId).getValue()
+                    + word.core!!.types.getNodeById(typeId).getValue()
                     ) + " does not match word PoS "
-                    + word.core.types.getNodeById(wordTypeId).getValue()
+                    + word.core!!.types.getNodeById(wordTypeId).getValue()
                 .toString() + "\n")
         }
 
