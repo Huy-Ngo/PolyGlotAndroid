@@ -1,9 +1,9 @@
 package com.polyglotandroid.core.nodes
 
 import com.polyglotandroid.core.PGUtil
+import com.polyglotandroid.core.WebInterface
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.util.function.Consumer
 
 /**
  * This class represents both the header for declension templates, and the actual
@@ -141,7 +141,7 @@ class DeclensionNode (declensionId: Int): DictNode(declensionId) {
     }
 
     override fun equals(other: Any?): Boolean =
-        if (this == other)
+        if (this === other)
             true
         else if (other != null && other is DeclensionNode)
             value == other.value &&
@@ -157,17 +157,15 @@ class DeclensionNode (declensionId: Int): DictNode(declensionId) {
             throw ClassCastException("Object not of type DeclensionNode")
         }
 
-        val node = _node
+        this.notes = _node.notes
+        value = _node.value
+        combinedDimId = _node.combinedDimId
+        this.dimensionless = _node.dimensionless
 
-        this.notes = node.notes
-        value = node.value
-        combinedDimId = node.combinedDimId
-        this.dimensionless = node.dimensionless
-
-        for (entry in node.dimensions.entries) run {
-            var cp_dim: DeclensionDimension = DeclensionDimension(entry.key)
-            cp_dim = entry.value
-            dimensions.put(entry.key, cp_dim)
+        for (entry in _node.dimensions.entries) run {
+            var cpDim: DeclensionDimension = DeclensionDimension(entry.key)
+            cpDim = entry.value
+            dimensions.put(entry.key, cpDim)
         }
 
     }
