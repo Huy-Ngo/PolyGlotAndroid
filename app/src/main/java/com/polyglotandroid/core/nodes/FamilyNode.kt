@@ -116,7 +116,7 @@ class FamilyNode : DictNode {
     val wordsIncludeSubs: List<ConWord>
         get() {
             val ret = wordsIncludeSubsInternal
-            Collections.sort(ret)
+            Collections.sort(ret) // FIXME: Turn this into an immutable operation
             return ret
         }// only add current word to return value if not already present
 
