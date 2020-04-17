@@ -2,6 +2,7 @@ package com.polyglotandroid.core.nodes
 
 import com.polyglotandroid.core.DictCore
 import com.polyglotandroid.core.PGUtil
+import com.polyglotandroid.core.WebInterface
 import com.polyglotandroid.core.collections.ConWordCollection
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -147,7 +148,7 @@ class ConWord(core: DictCore) : DictNode() {
         wordValue.appendChild(doc.createTextNode(wordId.toString()))
         wordNode.appendChild(wordValue)
 
-        wordValue = doc.createElement(PGUtil.LOCALWORD_XID)
+        wordValue = doc.createElement(PGUtil.LOCAL_WORD_XID)
         wordValue.appendChild(doc.createTextNode(this.localWord))
         wordNode.appendChild(wordValue)
 
