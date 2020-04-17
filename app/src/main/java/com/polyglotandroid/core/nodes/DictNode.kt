@@ -84,8 +84,8 @@ abstract class DictNode (_id: Int?) : Comparable<DictNode> {
                     ret = selfChild.compareTo(compChild)
                 }
             }
-            return ret
         }
+        return ret
     }
 
     override fun toString(): String = if (this.value.isEmpty()) " " else value

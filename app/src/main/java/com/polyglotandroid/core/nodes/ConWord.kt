@@ -7,7 +7,7 @@ import com.polyglotandroid.core.collections.ConWordCollection
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 
-class ConWord(core: DictCore) : DictNode() {
+class ConWord(core: DictCore?) : DictNode() {
     override var value: String = ""
         set(_value) {
             parentCollection?.externalBalanceWordCounts(id, _value, localWord)
