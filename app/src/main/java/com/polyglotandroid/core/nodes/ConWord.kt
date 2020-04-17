@@ -10,8 +10,7 @@ import org.w3c.dom.Element
 class ConWord(core: DictCore) : DictNode() {
     override var value: String = ""
         set(_value) {
-            if (parentCollection != null)
-                parentCollection.externalBalanceWordCounts(id, _value, localWord)
+            parentCollection?.externalBalanceWordCounts(id, _value, localWord)
             super.value = _value // TODO: Add RTL handling later
         }
     var localWord: String = ""
@@ -23,7 +22,7 @@ class ConWord(core: DictCore) : DictNode() {
             var ret: String = field
             if (!pronunciationOverride && core != null) {
                 val gen: String = core.PronunciationManager.getPronunciation(value)
-                if (!gen.isEmpty())
+                if (gen.isNotEmpty())
                     ret = gen
             }
             return ret
@@ -134,7 +133,6 @@ class ConWord(core: DictCore) : DictNode() {
             ret = try {
                 core.getTypes().getNodeById(typeId).getValue() // FIXME: Implement these funcs
             } catch (e: Exception) {
-                IOHandler.writeErrorLog(e) // FIXME: Implement this class
                 typeId = 0
             }
         }
@@ -194,7 +192,7 @@ class ConWord(core: DictCore) : DictNode() {
         wordValue = doc.createElement(PGUtil.WORD_CLASS_COLLECTION_XID)
         for ((key, value) in this.classValues) {
             val classVal = doc.createElement(PGUtil.WORD_CLASS_AND_VALUE_XID)
-            classVal.appendChild(doc.createTextNode(key.toString() + "," + value))
+            classVal.appendChild(doc.createTextNode("$key,$value"))
             wordValue.appendChild(classVal)
         }
         wordNode.appendChild(wordValue)
