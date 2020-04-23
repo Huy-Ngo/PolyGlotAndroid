@@ -115,7 +115,7 @@ class PGUtil {
         const val ROMANIZATION_GUIDE_NODE_XID = "romanizationGuideNode"
         const val ROMANIZATION_GUIDE_BASE_XID = "romanizationGuideBase"
         const val ROMANIZATION_GUIDE_PHONOLOGY_XID = "romanizationGuidePhonology"
-        const val ROMANIZATION_GUIDE_RECURSIVEE_XID = "romanizationGuideRecursive"
+        const val ROMANIZATION_GUIDE_RECURSIVE_XID = "romanizationGuideRecursive"
 
         // family properties
         // Originally these are thesNode etc but idk why
