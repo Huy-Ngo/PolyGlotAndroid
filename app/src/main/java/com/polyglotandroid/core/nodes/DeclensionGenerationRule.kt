@@ -9,7 +9,7 @@ import org.w3c.dom.Element
 class DeclensionGenerationRule(typeId: Int = -1, combinationId: String = "")
     : Comparable<DeclensionGenerationRule> {
     var typeId = 0
-    val index = -1
+    var index = -1
     var combinationId: String? = null
     var regex = ""
     var name = ""
