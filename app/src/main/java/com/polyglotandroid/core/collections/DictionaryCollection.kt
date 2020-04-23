@@ -2,6 +2,9 @@ package com.polyglotandroid.core.collections
 
 import com.polyglotandroid.core.customControls.AlphaMap
 import com.polyglotandroid.core.nodes.DictNode
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 abstract class DictionaryCollection<N> {
@@ -162,8 +165,8 @@ abstract class DictionaryCollection<N> {
             allValues.remove(nodeMap[exclude])
         }
 
-        // randommize order...
-        Collections.shuffle(allValues, Random(System.nanoTime()))
+        // randomize order...
+        allValues.shuffle(Random(System.nanoTime()))
 
         // can't return more than exist in the collection
         numRandom = if (numRandom > allValues.size) allValues.size else numRandom
