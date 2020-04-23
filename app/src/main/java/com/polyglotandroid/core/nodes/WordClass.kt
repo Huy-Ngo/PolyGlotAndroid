@@ -8,7 +8,6 @@ import java.util.function.Consumer
 /**
  * Word properties cover things such as gender. They may apply to all parts of
  * speech, or only select parts of speech.
- * @author Draque Thompson
  */
 class WordClass : DictNode() {
     private var parent: WordClassCollection? = null
