@@ -8,6 +8,7 @@ import kotlin.collections.HashMap
 
 
 abstract class DictionaryCollection<N> {
+    abstract var bufferNode: WordClass
     protected var alphaOrder: AlphaMap<String, Int>? = null
     protected val nodeMap: MutableMap<Int?, N?> = HashMap()
     var buffer: N? = null
