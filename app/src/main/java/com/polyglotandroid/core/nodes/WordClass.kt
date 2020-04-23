@@ -46,7 +46,7 @@ class WordClass : DictNode() {
         value = _node.value
         for (node in _node.getValues()) {
             try {
-                addValue(node.getValue(), node.getId())
+                addValue(node.value, node.id)
             } catch (e: Exception) {
                 throw ClassCastException(
                     "Problem setting class value: "
@@ -62,7 +62,7 @@ class WordClass : DictNode() {
      */
     @Throws(Exception::class)
     fun insert() {
-        addValue(buffer.getValue(), buffer.getId())
+        addValue(buffer.value, buffer.id)
         buffer = WordClassValue()
     }
 
@@ -162,8 +162,8 @@ class WordClass : DictNode() {
             throw Exception("Cannot insert value: $name Id: $id into $value (already exists).")
         }
         val ret = WordClassValue()
-        ret.setId(id)
-        ret.setValue(name)
+        ret.id = id
+        ret.value = name
         values[id] = ret
         if (id >= topId) {
             topId = id + 1

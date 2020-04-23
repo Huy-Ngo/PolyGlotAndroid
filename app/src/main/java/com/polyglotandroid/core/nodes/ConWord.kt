@@ -1,11 +1,13 @@
 package com.polyglotandroid.core.nodes
 
 import com.polyglotandroid.core.DictCore
+import com.polyglotandroid.core.IOHandler
 import com.polyglotandroid.core.PGUtil
 import com.polyglotandroid.core.WebInterface
 import com.polyglotandroid.core.collections.ConWordCollection
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+
 
 class ConWord(core: DictCore?) : DictNode() {
     override var value: String = ""
@@ -34,10 +36,10 @@ class ConWord(core: DictCore?) : DictNode() {
     // FIXME: Initiate these two properties properly
     var core: DictCore? = null
         set(value) {
-            if (value != null)
-                parentCollection = value.wordCollection
+            parentCollection = if (value != null)
+                value.wordCollection
             else
-                parentCollection = null
+                null
             field = value
         }
     private var parentCollection: ConWordCollection? = null
@@ -72,6 +74,47 @@ class ConWord(core: DictCore?) : DictNode() {
             classValues[classId] = valueId
         }
     }
+
+    fun getClassValues(): Set<Map.Entry<Int?, Int?>?>? {
+        // verify validity before returning each: otherwise remove
+        val classIt: Iterator<Map.Entry<Int, Int>> =
+            ArrayList(classValues.entries).iterator()
+        while (classIt.hasNext()) {
+            val curEntry = classIt.next()
+            if (!core.getWordPropertiesCollection().isValid(
+                    curEntry.key,
+                    curEntry.value
+                )
+            ) {
+                classValues.remove(curEntry.key)
+            }
+        }
+        return classValues.entries
+    }
+
+    fun getClassValue(classId: Int): Int? {
+        var ret: Int? = -1
+        if (classValues.containsKey(classId)) {
+            val tmp = classValues[classId]
+            if (tmp != null) {
+                ret = tmp
+            }
+        }
+        return ret
+    }
+
+    fun getClassTextValues(): Set<Map.Entry<Int?, String?>?>? {
+        val classIt: Iterator<Map.Entry<Int, String>> =
+            ArrayList(classTextValues.entries).iterator()
+        while (classIt.hasNext()) {
+            val curEntry = classIt.next()
+            if (!core.getWordPropertiesCollection().exists(curEntry.key)) {
+                classTextValues.remove(curEntry.key)
+            }
+        }
+        return classTextValues.entries
+    }
+
 
     @Throws(ClassCastException::class)
     override fun setEqual(_node: DictNode) {
@@ -134,10 +177,15 @@ class ConWord(core: DictCore?) : DictNode() {
                 core.getTypes().getNodeById(typeId).getValue() // FIXME: Implement these funcs
             } catch (e: Exception) {
                 typeId = 0
-            }
+            }.toString()
         }
         return ret
     }
+
+    fun setParent(_parent: ConWordCollection) {
+        parentCollection = _parent
+    }
+
     // TODO: clean up code
     fun writeXML (doc: Document, rootElement: Element) {
         val wordNode: Element = doc.createElement(PGUtil.WORD_XID)
