@@ -16,7 +16,7 @@ class FamilyManager(
      */
     var core: DictCore
 ) {
-    private var famRoot: FamilyNode? = null
+    private var familyRoot: FamilyNode? = null
     private var buffer: FamilyNode? = null
 
     /**
@@ -25,10 +25,10 @@ class FamilyManager(
      */
     val root: FamilyNode?
         get() {
-            if (famRoot == null) {
-                famRoot = FamilyNode(null, "Families", this)
+            if (familyRoot == null) {
+                familyRoot = FamilyNode(null, "Families", this)
             }
-            return famRoot
+            return familyRoot
         }
 
     /**
@@ -37,7 +37,7 @@ class FamilyManager(
      * @param wordList raw words from entry
      */
     fun removeDeadWords(fam: FamilyNode, wordList: List<ConWord?>?) {
-        val wordIt: Iterator<ConWord> = ArrayList(wordList).iterator()
+        val wordIt: MutableIterator<ConWord?> = ArrayList(wordList).iterator()
         while (wordIt.hasNext()) {
             val curWord = wordIt.next()
             if (!core.wordCollection.exists(curWord.id)) {
@@ -51,9 +51,9 @@ class FamilyManager(
      * Either creates new root or adds child/sets buffer to that.
      */
     fun buildNewBuffer() {
-        if (famRoot == null) {
-            famRoot = FamilyNode(null, this)
-            buffer = famRoot
+        if (familyRoot == null) {
+            familyRoot = FamilyNode(null, this)
+            buffer = familyRoot
         } else {
             val newBuffer = FamilyNode(buffer, this)
             buffer?.addNode(newBuffer)
@@ -85,45 +85,45 @@ class FamilyManager(
      * @return an element containing all family data
      */
     fun writeToSaveXML(doc: Document): Element {
-        return writeToSaveXML(doc, famRoot)
+        return writeToSaveXML(doc, familyRoot)
     }
 
     /**
      * this is the recursive function that completes the work of its overridden method
      * @param doc the document this is to be inserted into
-     * @param curNode node to build element for
+     * @param currentNode node to build element for
      * @return an element containing all family data
      */
-    private fun writeToSaveXML(doc: Document, curNode: FamilyNode?): Element {
-        val curElement: Element = doc.createElement(PGUtil.FAMILY_NODE_XID)
-        if (curNode == null) {
-            return curElement
+    private fun writeToSaveXML(doc: Document, currentNode: FamilyNode?): Element {
+        val currentElement: Element = doc.createElement(PGUtil.FAMILY_NODE_XID)
+        if (currentNode == null) {
+            return currentElement
         }
 
         // save name
         var property: Element = doc.createElement(PGUtil.FAMILY_NAME_XID)
-        property.appendChild(doc.createTextNode(curNode.value))
-        curElement.appendChild(property)
+        property.appendChild(doc.createTextNode(currentNode.value))
+        currentElement.appendChild(property)
 
         // save notes
         property = doc.createElement(PGUtil.FAMILY_NOTES_XID)
-        property.appendChild(doc.createTextNode(WebInterface.archiveHTML(curNode.notes)))
-        curElement.appendChild(property)
+        property.appendChild(doc.createTextNode(WebInterface.archiveHTML(currentNode.notes)))
+        currentElement.appendChild(property)
 
         // save words
-        val wordIt: Iterator<ConWord> = curNode.getWords()
+        val wordIt: Iterator<ConWord> = currentNode.getWords()
         while (wordIt.hasNext()) {
             val curWord = wordIt.next()
             property = doc.createElement(PGUtil.FAMILY_WORD_XID)
             property.appendChild(doc.createTextNode(curWord.id.toString()))
-            curElement.appendChild(property)
+            currentElement.appendChild(property)
         }
 
         // save subnodes
-        for (child in curNode.nodes) {
-            curElement.appendChild(writeToSaveXML(doc, child))
+        for (child in currentNode.nodes) {
+            currentElement.appendChild(writeToSaveXML(doc, child))
         }
-        return curElement
+        return currentElement
     }
 
 }
