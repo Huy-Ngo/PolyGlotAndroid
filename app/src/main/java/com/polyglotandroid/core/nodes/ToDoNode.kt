@@ -3,7 +3,6 @@ package com.polyglotandroid.core.nodes
 import com.polyglotandroid.core.PGUtil
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.util.function.Consumer
 
 class ToDoNode(var parent: ToDoNode?, private var value: String, _isDone: Boolean) {
     var isDone = false

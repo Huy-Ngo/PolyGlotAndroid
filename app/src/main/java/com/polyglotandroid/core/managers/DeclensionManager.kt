@@ -5,7 +5,6 @@ import com.polyglotandroid.core.PGUtil
 import com.polyglotandroid.core.nodes.*
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.util.function.Consumer
 import java.util.function.Function
 
 

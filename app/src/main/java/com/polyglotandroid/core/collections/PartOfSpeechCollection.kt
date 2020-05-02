@@ -7,8 +7,6 @@ import com.polyglotandroid.core.nodes.DictNode
 import com.polyglotandroid.core.nodes.PartOfSpeechNode
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.util.*
-import java.util.function.Consumer
 import kotlin.collections.ArrayList
 
 

@@ -1,6 +1,5 @@
 package com.polyglotandroid.core.customControls
 
-import java.util.*
 import kotlin.collections.HashMap
 
 /**
