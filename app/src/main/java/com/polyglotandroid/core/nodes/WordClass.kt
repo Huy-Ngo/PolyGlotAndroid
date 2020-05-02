@@ -3,7 +3,6 @@ package com.polyglotandroid.core.nodes
 import com.polyglotandroid.core.PGUtil
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.util.function.Consumer
 
 /**
  * Word properties cover things such as gender. They may apply to all parts of
