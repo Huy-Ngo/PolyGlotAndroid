@@ -13,33 +13,33 @@ import javax.swing.JLabel
  * @UI_handler
  */
 class PropertiesManager(_core: DictCore) {
-    val overrideProgramPath = ""
-    val conFont: Font? = null
-    val conFontStyle = 0
-    val conFontSize = 12.0
+    var overrideProgramPath = ""
+    var conFont: Font? = null
+    var conFontStyle = 0
+    var conFontSize = 12.0
     var localFontSize = 12.0
     var alphaOrder: AlphaMap<String, Int>? = null
-    val alphaPlainText = ""
-    val langName = ""
-    val localLangName = ""
-    val copyrightAuthorInfo = ""
-    val typesMandatory = false
-    val localMandatory = false
-    val wordUniqueness = false
-    val localUniqueness = false
-    val overrideRegexFont = false
-    val ignoreCase = false
-    val enableRomanization = false
-    val disableProcRegex = false
-    val enforceRTL = false
-    val useLocalWordLex = false
-    val cachedConFont: ByteArray? = null
+    var alphaPlainText = ""
+    var langName = ""
+    var localLangName = ""
+    var copyrightAuthorInfo = ""
+    var typesMandatory = false
+    var localMandatory = false
+    var wordUniqueness = false
+    var localUniqueness = false
+    var overrideRegexFont = false
+    var ignoreCase = false
+    var enableRomanization = false
+    var disableProcRegex = false
+    var enforceRTL = false
+    var useLocalWordLex = false
+    var cachedConFont: ByteArray? = null
     var cachedLocalFont: ByteArray? = null
     var charisUnicode: Font? = null
-    var localFont: Font? = null  // FIXME: This should be handled by other package
-    val charRep: Map<String, String> = HashMap()
+    var localFont: Font? = null  // FIXME: Look up Android package for Font to use it appropriately
+    var charRep: Map<String, String> = HashMap()
     var core: DictCore? = null
-    val kerningSpace = 0.0
+    var kerningSpace = 0.0
 
     @Throws(IOException::class)
     fun PropertiesManager(_core: DictCore) {
@@ -69,7 +69,7 @@ class PropertiesManager(_core: DictCore) {
         character: String?,
         _replacement: String?
     ) {
-        val replacement: String = PGUtil.stripRTL(_replacement)
+        var replacement: String = PGUtil.stripRTL(_replacement)
         if (charRep.containsKey(character)) {
             charRep.replace(character, replacement)
         } else {
@@ -78,8 +78,8 @@ class PropertiesManager(_core: DictCore) {
     }
 
     /**
-     * Deletes replacement value for a character
-     * @param character character for replacement values to be wiped for
+     * Deletes replacement varue for a character
+     * @param character character for replacement varues to be wiped for
      */
     fun delCharacterReplacement(character: String?) {
         if (charRep.containsKey(character)) {
