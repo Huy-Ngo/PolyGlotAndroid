@@ -76,7 +76,7 @@ class ReversionNode : Comparable<ReversionNode?> {
 
     override fun toString(): String {
         var ret = "saved: "
-        if (!saveTime.equals(Instant.MIN)) {
+        if (saveTime != Instant.MIN) {
             val formatter: DateTimeFormatter =
                 DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").withZone(ZoneId.systemDefault())
             ret += formatter.format(saveTime)
